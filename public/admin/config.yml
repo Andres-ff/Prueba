@@ -1,6 +1,11 @@
 backend:
-  name: git-gateway
-  branch: main
+  name: github
+  repo: https://github.com/Andres-ff/Prueba.git
+  auth_type: implicit
+  app_id: zUE7eUCZzBEJtPELVbK6vOESomY5m878
+  base_url: https://juandomingoprueba.netlify.app
+  auth_endpoint: https://juandomingoprueba.netlify.app/authorize
+
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
