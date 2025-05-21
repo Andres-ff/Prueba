@@ -12,11 +12,9 @@
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
 <script>
-  // Inicializa Netlify Identity
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", user => {
       if (!user) {
-        // Si no hay usuario logueado, espera a login para recargar
         window.netlifyIdentity.on("login", () => {
           document.location.reload();
         });
@@ -25,7 +23,6 @@
     window.netlifyIdentity.init();
   }
 
-  // Abre el widget al hacer click en el botón
   document.getElementById('login-btn').addEventListener('click', () => {
     window.netlifyIdentity.open();
   });
