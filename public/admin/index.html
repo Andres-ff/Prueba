@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Panel de administración</title>
-  </head>
-  <body>
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel de administración</title>
+</head>
+<body>
+
+<button id="login-btn">Iniciar sesión / Abrir panel</button>
+
+<script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<script>
+  // Inicializa Netlify Identity
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        // Si no hay usuario logueado, espera a login para recargar
+        window.netlifyIdentity.on("login", () => {
+          document.location.reload();
+        });
+      }
+    });
+    window.netlifyIdentity.init();
+  }
+
+  // Abre el widget al hacer click en el botón
+  document.getElementById('login-btn').addEventListener('click', () => {
+    window.netlifyIdentity.open();
+  });
+</script>
+
+</body>
 </html>
