@@ -1,0 +1,14 @@
+﻿[
+  {
+    "url": "images/imagen1.jpg",
+    "alt": "Descripción imagen 1"
+  },
+  {
+    "url": "images/imagen2.jpg",
+    "alt": "Descripción imagen 2"
+  },
+  {
+    "url": "images/imagen3.jpg",
+    "alt": "Descripción imagen 3"
+  }
+]
