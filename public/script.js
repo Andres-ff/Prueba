@@ -24,9 +24,8 @@ function renderSlide(index) {
   const isAfterBirthdayTime = currentHour > 11 || (currentHour === 11 && currentMinute > 30);
 
   if (slide.type === 'cumple') {
-    // Mostrar solo si es >= 11:30
     if (isBirthdayTime && alreadyPlayedDate !== today) {
-      // Mostrar con música
+      // 🎵 Mostrar con música solo una vez por día a las 11:30
       localStorage.setItem('birthdayMusicPlayed', today);
       container.innerHTML = `
         <div class="slide active bg-dark text-white d-flex" style="width: 100vw; height: 100vh;">
@@ -44,7 +43,7 @@ function renderSlide(index) {
         </div>
       `;
     } else if (isAfterBirthdayTime || alreadyPlayedDate === today) {
-      // Mostrar sin música
+      // ✅ Mostrar sin música después de 11:30 o si ya sonó hoy
       container.innerHTML = `
         <div class="slide active bg-dark text-white d-flex" style="width: 100vw; height: 100vh;">
           <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
@@ -57,8 +56,9 @@ function renderSlide(index) {
         </div>
       `;
     } else {
-      // Antes de 11:30 AM, no mostrar nada
-      container.innerHTML = '';
+      // ⏩ Antes de 11:30 AM → ignorar y pasar al siguiente
+      nextSlide();
+      return;
     }
 
   } else if (slide.type === 'image') {
@@ -89,14 +89,17 @@ function resetAutoSlide() {
   startAutoSlide();
 }
 
-// document.getElementById('prevBtn')?.addEventListener('click', () => {
-//   currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-//   renderSlide(currentIndex);
-//   resetAutoSlide();
-// });
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % slides.length;
+  renderSlide(currentIndex);
+  resetAutoSlide();
+}
 
-// document.getElementById('nextBtn')?.addEventListener('click', () => {
-//   currentIndex = (currentIndex + 1) % slides.length;
-//   renderSlide(currentIndex);
-//   resetAutoSlide();
-// });
+function prevSlide() {
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  renderSlide(currentIndex);
+  resetAutoSlide();
+}
+
+// document.getElementById('prevBtn')?.addEventListener('click', prevSlide);
+// document.getElementById('nextBtn')?.addEventListener('click', nextSlide);
